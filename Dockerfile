@@ -5,20 +5,19 @@ MAINTAINER Andreas Pfeil <ap+docker@gongjian.de>
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.docker.dockerfile="/Dockerfile" \
-    org.label-schema.license="BSD 3-Clause" \
-    org.label-schema.name="docker-mosquitto" \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-type="Git" \
-    org.label-schema.vcs-url="https://github.com/breadsword/docker-mosquitto"
+LABEL org.opencontainers.image.created=$BUILD_DATE \
+    org.opencontainers.image.licenses="BSD-3-Clause" \
+    org.opencontainers.image.title="docker-mosquitto" \
+    org.opencontainers.image.revision=$VCS_REF \
+    org.opencontainers.image.source="https://github.com/breadsword/docker-mosquitto"
 
 RUN apt-get update && \
     apt-get install -y mosquitto mosquitto-clients
 
-RUN mkdir -p /mosqitto/config /mosquitto/data /mosquitto/log
+RUN mkdir -p /mosquitto/config /mosquitto/data
 RUN chown -R mosquitto:mosquitto /mosquitto
-VOLUME ["/mosquitto/config", "/mosquitto/data", "/mosquitto/log"]
+RUN touch /mosquitto/config/mosquitto.conf
+VOLUME ["/mosquitto/config", "/mosquitto/data"]
 
 
 EXPOSE 1883 8883 9001
