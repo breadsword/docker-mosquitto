@@ -14,7 +14,7 @@ So I forked the container from [Thomas Kerpe](https://github.com/toke/docker-mos
 
 ## Run
 
-    docker run -ti -p 1883:1883 belandor/docker-mosquitto
+    docker run -ti -p 1883:1883 -p 8883:8883 -p 9001:9001 belandor/docker-mosquitto
 
 Exposes Port 1883 (MQTT), 8883 (MQTTS), 9001 (websockets)
 
