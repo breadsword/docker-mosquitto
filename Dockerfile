@@ -11,6 +11,9 @@ LABEL org.opencontainers.image.created=$BUILD_DATE \
     org.opencontainers.image.authors="Andreas Pfeil <ap+docker@gongjian.de>"
 
 RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:mosquitto-dev/mosquitto-ppa && \
+    apt-get update && \
     apt-get install -y mosquitto mosquitto-clients
 
 RUN mkdir -p /mosquitto/config /mosquitto/data
